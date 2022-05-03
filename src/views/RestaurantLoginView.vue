@@ -3,8 +3,7 @@
         
         <v-form>
             <v-container>
-                <UserLogin/>
-                <UserRegistration/>
+                <RestaurantRegistration/>
             </v-container>
         <v-btn>Login</v-btn>
         <v-btn>Register</v-btn>
@@ -13,16 +12,15 @@
 </template>
 
 <script>
-import UserLogin from "@/components/UserLogin.vue"
-import UserRegistration from '@/components/UserRegistration.vue'
+import RestaurantRegistration from '@/components/RestaurantRegistration.vue'
+
 
 
     export default {
-        name : "LoginView",
+        name : "RestaurantLoginView",
         components : {
-            UserLogin,
-            UserRegistration
-               
+            RestaurantRegistration
+            
         }   
     }
 </script>

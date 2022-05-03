@@ -1,5 +1,7 @@
 <template>
-  <v-app>
+  <v-app
+  id="appPage"
+  >
   
     <v-app-bar
       app
@@ -22,10 +24,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-card
-      color="secondary">
       <router-view/>
-      </v-card>
     </v-main>
   </v-app>
 </template>
@@ -34,7 +33,6 @@
 
 export default {
   name: 'App',
-
   data: () => ({
     //
   }),
@@ -42,5 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#appPage{
+  background-color: bisque;
+}
 </style>

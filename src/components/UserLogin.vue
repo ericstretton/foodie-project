@@ -8,8 +8,8 @@
                 cols="12"
                 sm="6">
                 <v-text-field
-                    v-model="username"
-                    label="Username"
+                    v-model="email"
+                    label="E-mail"
                     outlined
                 ></v-text-field>
                 <v-text-field
@@ -21,15 +21,27 @@
             </v-row>
         </v-container>
         </v-form>
+        <v-btn @click="handleUserLogin">Log-In</v-btn>
     </v-container>
 </template>
 
 <script>
-
+import {useMainStore} from '@/stores/main';
+import {mapActions} from 'pinia';
 
     export default {
         name: "UserLogin",
-
+        data:() =>({
+                password: '',
+                email: ''
+            }),
+        methods:{
+            ...mapActions(useMainStore, ['userLogin']),
+            handleUserLogin(){
+                this.userLogin(this.password, this.email)
+                
+            }
+        }
     }
 </script>
 
