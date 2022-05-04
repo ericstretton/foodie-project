@@ -8,7 +8,7 @@
                 cols="10"
                 sm="6">
                 <v-text-field
-                    v-model="restaurantName"
+                    v-model="name"
                     label="Restaurant Name"
                     outlined>
                 </v-text-field>
@@ -66,7 +66,7 @@ import {mapActions} from 'pinia';
     export default {
         name: "RestaurantRegistration",
         data: ()=> ({
-            restaurantName: '',
+            name: '',
             address: '',
             bio: '',
             city: '',
@@ -79,8 +79,8 @@ import {mapActions} from 'pinia';
         methods:{
             ...mapActions(useMainStore, ['createRestaurant']),
             handleRestaurantRegistration() {
-                this.createRestaurant(this.restaurantName, this.address, this.phoneNum, this.profileUrl,
-                this.bio, this.city, this.email, this.password, this.bannerUrl );
+                this.createRestaurant(this.name, this.address, this.bio, this.city,
+                this.email, this.password, this.phoneNum, this.bannerUrl, this.profileUrl );
             },
         }
     }

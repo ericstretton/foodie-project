@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {useMainStore} from '@/stores/main';
+import {useMainStore} from '@/stores/main'
 import {mapActions} from 'pinia';
 
     export default {

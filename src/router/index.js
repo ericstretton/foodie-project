@@ -14,12 +14,12 @@ const routes = [
   },
   {
     path : "/explore",
-    name : "ExploreView",
+    name : "Explore",
     component : ExploreView
   },
   {
     path : "/restaurant-login",
-    name : "RestaurantLoginView",
+    name : "RestaurantLogin",
     component: RestaurantLoginView
   }
   

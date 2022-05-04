@@ -69,16 +69,16 @@ import {mapActions} from 'pinia';
                 console.log(response);
             }
         },
-        // mounted () {
-        //     useMainStore().$onAction(({name, after})=>{
-        //         if (name == "userRegisterAlert"){
-        //             console.log("handling");
-        //             after((response)=>{
-        //                 this.handleError(response);
-        //             })
-        //         }
-        //     });
-        // },
+        mounted () {
+            useMainStore().$onAction(({name, after})=>{
+                if (name == "userRegisterAlert"){
+                    console.log("handling");
+                    after((response)=>{
+                        this.handleError(response);
+                    })
+                }
+            });
+        },
     }
 </script>
 

@@ -3,8 +3,8 @@
         
         <v-form>
             <v-container>
-                <UserLogin/>
                 <UserRegistration/>
+                <UserLogin/>
             </v-container>
         <v-btn>Login</v-btn>
         <v-btn>Register</v-btn>

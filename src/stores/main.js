@@ -4,9 +4,7 @@ import cookies from 'vue-cookies';
 import {router} from '@/router'
 
 export const useMainStore = defineStore('main',{
-    state : () => {
-
-    },
+    
     methods:{
 
     },
@@ -33,12 +31,14 @@ export const useMainStore = defineStore('main',{
                 router.push('/explore');
             }).catch((error) =>{
                 console.log(error.response.data);
-                this.userRegisterAlert(error.response);
+                // this.userRegisterAlert(error.response);
             })
         },
+
         userRegisterAlert(error){
             return (error)
         },
+
         userLogin(password, email){
             axios.request({
                 headers:{
@@ -59,24 +59,47 @@ export const useMainStore = defineStore('main',{
                 console.log(error);
             })
         },
-        createRestaurant(restaurantName, address, bio, city, email, password, phoneNum, bannerUrl, profileUrl ){
+
+
+
+        createRestaurant(name, address, bio, city, email, password, phoneNum, bannerUrl, profileUrl ){
             axios.request({
                 headers:{
                     "x-api-key" : process.env.VUE_APP_API_KEY,
+                    'Content-Type' : 'application/json',
                     "token" : cookies.get('sessionToken'),
                 },
                 url: process.env.VUE_APP_API_URL+"restaurant",
                 method: "POST",
                 data: {
-                    restaurantName,
+                    name,
                     address,
+                    phoneNum,
                     bio,
                     city,
                     email,
                     password,
-                    phoneNum,
                     bannerUrl,
                     profileUrl
+                },
+            }).then((response) =>{
+                cookies.set('sessionToken', response.data.token);
+                console.log(cookies.get('sessionToken'));
+                router.push('/restaurant-profile')
+            }).catch((error) =>{
+                console.log(error);
+            })
+        },
+        restaurantLogin(email, password){
+            axios.request({
+                headers:{ 
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                url : process.env.VUE_APP_API_URL+"restaurant-login",
+                method: "POST",
+                data: {
+                    email,
+                    password
                 },
             }).then((response) =>{
                 cookies.set('sessionToken', response.data.token);
