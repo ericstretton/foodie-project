@@ -14,13 +14,13 @@ export default new Vuetify({
           },
         },
       },
-      // breakpoint: {
-      //   thresholds: {
-      //     xs: 340,
-      //     sm: 540,
-      //     md: 800,
-      //     lg: 1440,
-      //   },
+      breakpoint: {
+        thresholds: {
+          xs: 340,
+          sm: 540,
+          md: 800,
+          lg: 1440,
+        },
         
-      // },
+      },
 });

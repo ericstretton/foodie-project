@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import ExploreView from '@/views/ExploreView.vue'
 import RestaurantLoginView from '@/views/RestaurantLoginView'
+import RestaurantProfileView from '@/views/RestaurantProfileView'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path : "/restaurant-login",
     name : "RestaurantLogin",
     component: RestaurantLoginView
+  },
+  {
+    path : "/restaurant-profile",
+    name : "RestaurantProfile",
+    component : RestaurantProfileView
   }
   
   
