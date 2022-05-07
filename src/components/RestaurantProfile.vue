@@ -25,6 +25,7 @@
                     </v-col>
                 </v-row>
             </v-card>
+            <ViewRestaurantMenuItems/>
             <CreateMenuItems/>
             <v-card
             width="50vw">
@@ -48,11 +49,15 @@
 <script>
 import CreateMenuItems from './CreateMenuItems.vue'
 import RestaurantProfileInformation from '@/components/RestaurantProfileInformation.vue'
+import ViewRestaurantMenuItems from '@/components/ViewRestaurantMenuItems.vue'
     export default {
         name : "RestaurantProfile",
         components: {
                 CreateMenuItems,
-                RestaurantProfileInformation
+                RestaurantProfileInformation,
+                ViewRestaurantMenuItems,
+
+
 
         }
     }

@@ -6,40 +6,15 @@ import {router} from '@/router'
 export const useMainStore = defineStore('main',{
     state: () =>{
         return {
-            restaurantName : '',
-            restaurantAddress: '',
-            restaurantBannerImage: '',
-            restaurantBio: '',
-            restaurantCityName: '',
-            restaurantEmail: '',
-            restaurantPhoneNumber: '',
-            restaurantProfileImage: ''
+            restaurantObject: {
+                
+            },
+            restaurantMenuObject: {
+
+            }
         }
     },
-    methods:{
-        getRestaurantInfo(){
-            axios.request({
-                headers : {
-                    "x-api-key" : process.env.VUE_APP_API_KEY
-                },
-                params : {
-                    restuarantId: this.restuarantId
-                },
-                url : process.env.VUE_APP_API_URL+"restaurant",
-                method : "GET"
-            }).then((response) =>{
-                this.restaurantName = response.data[1].name;
-                this.restaurantAddress = response.data[1].address;
-                this.restaurantBannerImage = response.data.bannerUrl;
-                this.restaurantBio = response.data.bio;
-                this.restaurantCityName = response.data.city;
-                this.restaurantEmail = response.data.email;
-                this.restaurantPhoneNumber = response.data.phoneNum;
-                this.restaurantProfileImage = response.data.profileUrl;
-            })
-        },
-
-    },
+    
     actions: {
         
 
@@ -148,6 +123,60 @@ export const useMainStore = defineStore('main',{
             })
         },
 
+// #3 View Restaurant Information ALL users for unique restaurant Id
+        getRestaurantInfo(){
+            axios.request({
+                headers : {
+                    "x-api-key" : process.env.VUE_APP_API_KEY
+                },
+                params : {
+                    restaurantId: this.restaurantObject.restaurantId
+                },
+                url : process.env.VUE_APP_API_URL+"restaurant",
+                method : "GET"
+            }).then((response) =>{
+                this.restaurantObject = response.data[0];
+                // this.restaurantObject1 = response.data[1];
+                // for (let i = 1; i < 1000; i++) {
+                //     if(this.restaurantObject['restaurantId' +i] == ""){
+                //     break;
+                //     }
+                //     console.log(this.restaurantObject['restaurantId' +i]);
+                //     this.restaurantList.push(this.restaurantObject['restaurantId' +i]);
+                    
+                // }
+                console.log(response);
+            }).catch((error)=>{
+                console.log(error);
+            })
+        },
+
+// #4 Update Restaurant Client information
+        updateRestaurantInfo(name, address, bio, city, phoneNum, email, bannerUrl, profileUrl){
+            axios.request({
+                headers: {
+                    "x-api-key" : process.env.VUE_APP_API_KEY,
+                    "token" : cookies.get('sessionToken')
+                },
+                url : process.env.VUE_APP_API_URL+"restaurant",
+                method : "PATCH",
+                data: {
+                    name,
+                    address,
+                    bannerUrl, 
+                    bio, 
+                    city, 
+                    email,
+                    phoneNum, 
+                    profileUrl
+                }
+            }).then((response) =>{
+                console.log(response);
+            }).catch((error) =>{
+                console.log(error);
+            })
+        },
+
 // Menu Actions 
 // Restaurant Related
         // Restaurant side Menu Post request to create new menu items 
@@ -170,9 +199,29 @@ export const useMainStore = defineStore('main',{
         }).catch((error) =>{
             console.log(error);
         })
+    },
+
+    getRestaurantMenuItems(){
+        axios.request({
+            headers: {
+                "x-api-key" : process.env.VUE_APP_API_KEY,
+            },
+            params : {
+                restaurantId: this.restaurantMenuObject.restaurantId
+            },
+            url : process.env.VUE_APP_API_URL+"menu",
+            method: "GET"
+        }).then((response) =>{
+            this.restaurantMenuObject = response.data[0];
+            console.log(response);
+        }).catch((error) =>{
+            console.log(error);
+        })
     }
     },
-    
+    getters: {
+        
+    }
     
     
 })
