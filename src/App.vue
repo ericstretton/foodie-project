@@ -8,18 +8,44 @@
       color="primary"
     >
       <div class="d-flex align-center">
-        <h1>Navigation Tab</h1>
+        <h1>Foodie</h1>
       </div>
 
-      <v-spacer></v-spacer>
+      <v-spacer>
+       
+      </v-spacer>
+        <v-btn
+        href=""
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Profile</span>
+        
+      </v-btn>
 
+        <v-btn
+        href=""
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Orders</span>
+        
+      </v-btn>
+        <v-btn
+        href=""
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Cart</span>
+        
+      </v-btn>
       <v-btn
         href=""
         target="_blank"
         text
       >
         <span class="mr-2">Explore</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        
       </v-btn>
     </v-app-bar>
 

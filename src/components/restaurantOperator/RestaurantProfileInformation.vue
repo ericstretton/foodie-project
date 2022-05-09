@@ -1,5 +1,6 @@
 <template>
-    <v-container>   
+    <v-container>  
+         
         <v-subheader>
         <h1>Restaurants Current Information</h1>
         </v-subheader>
@@ -13,6 +14,8 @@
         <h3>Email: {{restaurantObject.email}}</h3>
         <h3>Phone Number: {{restaurantObject.phoneNum}}</h3>
         </v-container>
+        
+        
         <v-subheader>
         <h1>Update Restaurant Information</h1>
         </v-subheader>
@@ -89,13 +92,13 @@ import {mapActions} from 'pinia';
             profileUrl: undefined,
                 }),
         mounted () {
-            this.getRestaurantInfo();
+            this.getRestaurantInfoById();
         },
         computed: {
             ...mapState(useMainStore, ['restaurantObject'])
         },
         methods: {
-            ...mapActions(useMainStore, ['updateRestaurantInfo', 'getRestaurantInfo']),
+            ...mapActions(useMainStore, ['updateRestaurantInfo', 'getRestaurantInfoById']),
             handleUpdateRestaurantInfo() {
                 this.updateRestaurantInfo(this.name, this.address, this.bio, this.city, this.phoneNu, this.email, this.bannerUrl, this.profileUrl)
             },

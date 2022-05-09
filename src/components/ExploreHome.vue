@@ -1,17 +1,92 @@
 <template>
     <v-container>
-        <h1>This is where the restaurant browse stuff goes</h1>
-        <ViewRestaurant/>
-        <ViewRestaurant/>
-        <ViewRestaurant/>
+    <v-row
+    >
+    <v-col  
+    >
+        <v-card
+            class="mx-auto mb-8"
+            max-width="400"
+            v-for="restaurant in restaurantObjects" 
+            :key="restaurant.restaurantId"
+        >
+            <v-img
+            class="white--text align-end"
+            height="200px"
+            :src="restaurant.bannerUrl"
+            >
+            <v-card-title
+            >{{restaurant.name}} </v-card-title>
+            </v-img>
+
+            <v-card-subtitle 
+            class="pb-0">
+            {{restaurant.city}}
+            </v-card-subtitle>
+
+            <v-card-text class="text--primary">
+            <div><p
+            >{{restaurant.address}}
+            </p></div>
+
+            <div><p
+            >{{restaurant.phoneNum}}
+            </p></div>
+            </v-card-text>
+
+            <v-card-actions>
+                <v-btn
+                color="orange"
+                text
+                >
+                Menu
+                </v-btn>
+
+                <v-btn
+                color="orange"
+                text
+                
+                >
+                Restaurant Page
+            </v-btn>
+            </v-card-actions>
+        </v-card>
+    </v-col>
+    </v-row>
     </v-container>
+        
 </template>
 
 <script>
-import ViewRestaurant from './ViewRestaurant.vue'
+import {mapActions} from 'pinia';
+import {useMainStore} from '@/stores/main.js';
+import {mapState} from 'pinia';
+
     export default {
-  components: { ViewRestaurant },
-        name : "ExploreHome"
+  components: {  },
+        name : "ExploreHome",
+        data: ()=> ({
+            name: '',
+            address: '',
+            bio: '',
+            city: '',
+            email: '',
+            phoneNum: '',
+            bannerUrl: undefined,
+            profileUrl: undefined,
+            
+            restaurantId: []
+                }),
+        mounted () {
+            this.getRestaurantInfo();
+        },
+        computed: {
+            ...mapState(useMainStore, ['restaurantObjects'])
+        },
+        methods: {
+            ...mapActions(useMainStore, ['getRestaurantInfo']),
+            
+        },
     }
 </script>
 

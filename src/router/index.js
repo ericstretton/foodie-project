@@ -4,6 +4,8 @@ import LoginView from '@/views/LoginView.vue'
 import ExploreView from '@/views/ExploreView.vue'
 import RestaurantLoginView from '@/views/RestaurantLoginView'
 import RestaurantProfileView from '@/views/RestaurantProfileView'
+import RestaurantPublicView from '@/views/RestaurantPublicView'
+import UserProfileView from '@/views/UserProfileView'
 
 Vue.use(VueRouter)
 
@@ -27,6 +29,16 @@ const routes = [
     path : "/restaurant-profile",
     name : "RestaurantProfile",
     component : RestaurantProfileView
+  },
+  {
+    path : "/restaurant",
+    name : "RestaurantPublic",
+    component : RestaurantPublicView
+  },
+  {
+    path : "/user-profile",
+    name : "UserProfile",
+    component : UserProfileView
   }
   
   

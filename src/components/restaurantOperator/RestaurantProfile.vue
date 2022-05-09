@@ -22,11 +22,14 @@
                         <v-btn>View</v-btn>
                         <v-btn>Create</v-btn>
                         <v-btn>Update</v-btn>
+                        <v-btn>Delete</v-btn>
                     </v-col>
                 </v-row>
             </v-card>
             <ViewRestaurantMenuItems/>
             <CreateMenuItems/>
+            <UpdateRestaurantMenuItem/>
+            <RemoveRestaurantMenuItem/>
             <v-card
             width="50vw">
                 <v-subheader>
@@ -47,17 +50,19 @@
 </template>
 
 <script>
-import CreateMenuItems from './CreateMenuItems.vue'
-import RestaurantProfileInformation from '@/components/RestaurantProfileInformation.vue'
+import CreateMenuItems from '@/components/restaurantOperator/CreateMenuItems.vue'
+import RestaurantProfileInformation from '@/components/restaurantOperator/RestaurantProfileInformation.vue'
 import ViewRestaurantMenuItems from '@/components/ViewRestaurantMenuItems.vue'
+import UpdateRestaurantMenuItem from '@/components/restaurantOperator/UpdateRestaurantMenuItem.vue'
+import RemoveRestaurantMenuItem from './RemoveRestaurantMenuItem.vue'
     export default {
         name : "RestaurantProfile",
         components: {
                 CreateMenuItems,
                 RestaurantProfileInformation,
                 ViewRestaurantMenuItems,
-
-
+                UpdateRestaurantMenuItem,
+                RemoveRestaurantMenuItem,
 
         }
     }

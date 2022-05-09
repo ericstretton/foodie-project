@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RestaurantProfile from '@/components/RestaurantProfile.vue'
+import RestaurantProfile from '@/components/restaurantOperator/RestaurantProfile.vue'
     export default {
         name : "RestaurantProfileView",
         components: {
