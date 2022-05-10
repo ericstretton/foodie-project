@@ -1,14 +1,19 @@
 <template>
     <v-container>
     <v-row
+    
     >
-    <v-col  
+    <v-col
+    
+    class=".d-lg-cols=10 .d-sm-cols=6"
     >
+    <div>
         <v-card
-            class="mx-auto mb-8"
+            class="mx-auto mb-8 "
             max-width="400"
             v-for="restaurant in restaurantObjects" 
             :key="restaurant.restaurantId"
+            
         >
             <v-img
             class="white--text align-end"
@@ -51,8 +56,10 @@
             </v-btn>
             </v-card-actions>
         </v-card>
+        </div>
     </v-col>
     </v-row>
+    
     </v-container>
         
 </template>

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import RestaurantRegistration from '@/components/restaurantUser/RestaurantRegistration.vue'
-import RestaurantLogin from '@/components/restaurantUser/RestaurantLogin.vue'
+import RestaurantRegistration from '@/components/restaurantOperator/RestaurantRegistration.vue'
+import RestaurantLogin from '@/components/restaurantOperator/RestaurantLogin.vue'
 
 
 

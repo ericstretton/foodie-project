@@ -6,18 +6,19 @@ import {router} from '@/router'
 export const useMainStore = defineStore('main',{
     state: () =>{
         return {
-            restaurantObject: {
-               
-            },
-            restaurantMenuObject: {
-            },
-            restaurantObjects: {
+            restaurantId: '',
+            restaurantObject: {},
+            restaurantMenuObject: {},
+            restaurantObjects: {},
+            userObject: {},
 
-            },
-            userObject: {
+            items: [],
 
-            }
-            
+            restaurantOrders: [],
+            restaurantOrder: {},
+
+            clientOrders: [],
+            clientOrder: {}
         }
     },
     
@@ -43,8 +44,8 @@ export const useMainStore = defineStore('main',{
                     pictureUrl
                 }
             }).then((response) =>{
-                cookies.set('sessionToken', response.data.token);
-                console.log(cookies.get('sessionToken'));
+                cookies.set('clientUserToken', response.data.token);
+                console.log(cookies.get('clientUserToken'));
                 router.push('/explore');
             }).catch((error) =>{
                 console.log(error.response.data);
@@ -70,7 +71,7 @@ export const useMainStore = defineStore('main',{
                 },
             }).then((response) =>{
                 console.log(response);
-                cookies.set('sessionToken', response.data.token);
+                cookies.set('clientUserToken', response.data.token);
                 router.push('/explore');
             }).catch((error) =>{
                 console.log(error);
@@ -82,7 +83,7 @@ export const useMainStore = defineStore('main',{
             axios.request({
                 headers:{
                     "x-api-key" : process.env.VUE_APP_API_KEY,
-                    "token" : cookies.get('sessionToken'),
+                    "token" : cookies.get('clientUserToken'),
                 },
                 url: process.env.VUE_APP_API_URL+"client",
                 method : "GET",
@@ -108,7 +109,7 @@ export const useMainStore = defineStore('main',{
             axios.request({
                 headers:{
                     "x-api-key" : process.env.VUE_APP_API_KEY,
-                    "token" : cookies.get('sessionToken'),
+                    "token" : cookies.get('clientUserToken'),
                 },
                 url : process.env.VUE_APP_API_URL+"client",
                 method : "PATCH",
@@ -128,7 +129,7 @@ export const useMainStore = defineStore('main',{
             axios.request({
                 headers:{
                     "x-api-key" : process.env.VUE_APP_API_KEY,
-                    "token" : cookies.get('sessionToken'),
+                    "token" : cookies.get('clientUserToken'),
                     "Content-Type" : 'application/json'
                 },
                 url : process.env.VUE_APP_API_URL+"client",
@@ -155,7 +156,7 @@ export const useMainStore = defineStore('main',{
                 headers:{
                     "x-api-key" : process.env.VUE_APP_API_KEY,
                     'Content-Type' : 'application/json',
-                    "token" : cookies.get('sessionToken'),
+                    "token" : cookies.get('clientUserToken'),
                 },
                 url: process.env.VUE_APP_API_URL+"restaurant",
                 method: "POST",
@@ -171,8 +172,8 @@ export const useMainStore = defineStore('main',{
                     profileUrl
                 },
             }).then((response) =>{
-                cookies.set('sessionToken', response.data.token);
-                console.log(cookies.get('sessionToken'));
+                cookies.set('restaurantToken', response.data.token);
+                console.log(cookies.get('restaurantToken'));
                 router.push('/restaurant-profile')
             }).catch((error) =>{
                 console.log(error);
@@ -191,8 +192,8 @@ export const useMainStore = defineStore('main',{
                     password
                 },
             }).then((response) =>{
-                cookies.set('sessionToken', response.data.token);
-                console.log(cookies.get('sessionToken'));
+                cookies.set('rsetaurantToken', response.data.token);
+                console.log(cookies.get('restaurantToken'));
                 router.push('/restaurant-profile')
             }).catch((error) =>{
                 console.log(error);
@@ -209,7 +210,7 @@ export const useMainStore = defineStore('main',{
                 method : "GET"
             }).then((response) =>{
                 this.restaurantObjects = response.data;
-                
+                this.restaurantId = response.data[0].restaurantId
                 console.log(response);
             }).catch((error)=>{
                 console.log(error);
@@ -223,13 +224,13 @@ export const useMainStore = defineStore('main',{
                     "x-api-key" : process.env.VUE_APP_API_KEY
                 },
                 params : {
-                    restaurantId: this.restaurantObject.restaurantId
+                    restaurantId : this.restaurantObject.restaurantId
                 },
                 url : process.env.VUE_APP_API_URL+"restaurant",
                 method : "GET"
             }).then((response) =>{
                 this.restaurantObject = response.data[0];
-                
+                this.restaurantId = response.data[0].restaurantId
                 console.log(response);
             }).catch((error)=>{
                 console.log(error);
@@ -243,7 +244,7 @@ export const useMainStore = defineStore('main',{
             axios.request({
                 headers: {
                     "x-api-key" : process.env.VUE_APP_API_KEY,
-                    "token" : cookies.get('sessionToken')
+                    "token" : cookies.get('restaurantToken')
                 },
                 url : process.env.VUE_APP_API_URL+"restaurant",
                 method : "PATCH",
@@ -271,7 +272,7 @@ export const useMainStore = defineStore('main',{
         axios.request({
             headers:{
                 "x-api-key" : process.env.VUE_APP_API_KEY,
-                "token" : cookies.get('sessionToken')
+                "token" : cookies.get('restaurantToken')
             },
             url : process.env.VUE_APP_API_URL+"menu",
             method : "POST",
@@ -295,7 +296,7 @@ export const useMainStore = defineStore('main',{
                 "x-api-key" : process.env.VUE_APP_API_KEY,
             },
             params : {
-                restaurantId: this.restaurantObject.restaurantId
+                restaurantId : this.restaurantObject.restaurantId
             },
             url : process.env.VUE_APP_API_URL+"menu",
             method: "GET"
@@ -312,7 +313,7 @@ export const useMainStore = defineStore('main',{
         axios.request({
             headers: {
                 "x-api-key" : process.env.VUE_APP_API_KEY,
-                "token" : cookies.get('sessionToken')
+                "token" : cookies.get('restaurantToken')
             },
             url : process.env.VUE_APP_API_URL+"menu",
             method: "PATCH",
@@ -336,7 +337,7 @@ export const useMainStore = defineStore('main',{
         axios.request({
             headers: {
                 "x-api-key" : process.env.VUE_APP_API_KEY,
-                "token" : cookies.get('sessionToken')
+                "token" : cookies.get('restaurantToken')
             },
             url : process.env.VUE_APP_API_URL+"menu",
             method : "DELETE",
@@ -349,19 +350,71 @@ export const useMainStore = defineStore('main',{
             console.log(error);
         })
     },
-
-
-    // Adding menu items to the shopping Cart. 
+// Adding menu items to the shopping Cart. 
     addToCart(menuId, restaurantId){
         cookies.set("cartToken", menuId + restaurantId)
-    }
+    },
+
+
+
+
+// Order Related Requests
+
+// #1 Client Creating Orders
+    userCreateOrder(restaurantId, items){
+        axios.request({
+            headers: {
+                "x-api-key" : process.env.VUE_APP_API_KEY,
+                "token" : cookies.get('clientUserToken')
+            },
+            url : process.env.VUE_APP_API_URL+"order",
+            method : "POST",
+            data : {
+                restaurantId,
+                items
+            }
+        }).then((response) =>{
+            console.log(response +"Order Created");
+        }).catch((error) => {
+            console.log(error);
+        })
+    },
+
+    // #2(a) Get request for Client to view order history
+    clientViewOrders(){
+        axios.request({
+            headers: {
+                "x-api-key" : process.env.VUE_APP_API_KEY,
+                "token" : cookies.get('clientUserToken')
+            },
+            url : process.env.VUE_APP_API_URL+"order",
+            method : "GET"
+        }).then((response) => {
+            console.log(response);
+            this.clientOrders = response.data
+        }).catch((error) => {
+            console.log(error);
+        })
+    },
+
+    // #2(b) Get Request for Restaurant to view all current orders
+    restaurantViewOrders(){
+        axios.request({
+            headers: {
+                "x-api-key" : process.env.VUE_APP_API_KEY,
+                "token" : cookies.get('restaurantToken')
+            },
+            url : process.env.VUE_APP_API_URL+"order",
+            method : "GET"
+        }).then((response) => {
+            console.log(response);
+            this.restaurantOrders = response.data
+        }).catch((error) => {
+            console.log(error);
+        })
+    },
 
     },
 
-    getters: {
-        
-    }
-    
-    
 })
     

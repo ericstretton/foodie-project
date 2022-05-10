@@ -59,7 +59,7 @@ import {mapState} from 'pinia';
             shoppingCart: []
         }),
         mounted () {
-            this.getRestaurantMenuItems();
+            this.getRestaurantMenuItems(this.restaurantId);
             
         },
         computed: {

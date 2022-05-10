@@ -27,12 +27,14 @@ import {mapActions} from 'pinia';
         data: () =>({
             menuId: ''
         }),
+        
         methods: {
             ...mapActions(useMainStore, ['deleteMenuItem']),
             handleDeleteMenuItem() { 
                 this.deleteMenuItem(this.menuId)
             }
-        }
+        },
+       
     }
 </script>
 

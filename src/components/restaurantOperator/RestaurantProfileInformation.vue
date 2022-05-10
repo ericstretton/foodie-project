@@ -92,6 +92,7 @@ import {mapActions} from 'pinia';
             profileUrl: undefined,
                 }),
         mounted () {
+            //  const restaurantId = this.$route.params.restaurantId;
             this.getRestaurantInfoById();
         },
         computed: {

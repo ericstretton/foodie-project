@@ -6,6 +6,7 @@ import RestaurantLoginView from '@/views/RestaurantLoginView'
 import RestaurantProfileView from '@/views/RestaurantProfileView'
 import RestaurantPublicView from '@/views/RestaurantPublicView'
 import UserProfileView from '@/views/UserProfileView'
+import ShoppingCartView from '@/views/ShoppingCartView'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path : "/user-profile",
     name : "UserProfile",
     component : UserProfileView
+  },
+  {
+    path : "/cart",
+    name : "ShoppingCart",
+    component : ShoppingCartView
   }
   
   
